@@ -60,4 +60,16 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.rowHeight = 320;
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let post = posts[indexPath.row]
+        
+        let photoDetailsViewController = segue.destination as! PhotoDetailsViewController
+        photoDetailsViewController.post = post
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        cell.selectionStyle = .none
+    }
+    
 }
